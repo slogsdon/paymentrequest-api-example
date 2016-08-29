@@ -15,26 +15,33 @@
        * Invokes PaymentRequest for credit cards.
        */
       function onBuyClicked() {
-        var supportedInstruments = [{
-          supportedMethods: [
-            // 'amex', 
-            // 'diners', 
-            // 'discover', 
-            // 'jcb', 
-            // 'mastercard',
-            // 'unionpay', 
-            // 'visa', 
-            'https://android.com/pay'
-          ],
-          data:
-            merchantName: 'Android Pay Demo',
-            // Place your own Android Pay merchant ID here. The merchant ID is tied to
-            // the origin of the website.
-            merchantId: '00184145120947117657',
-            // If you do not yet have a merchant ID, uncomment the following line.
-            // environment: 'TEST',
-            allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
-        }];
+        var supportedInstruments = [
+          {
+            supportedMethods: [
+              // 'amex', 
+              // 'diners', 
+              // 'discover', 
+              // 'jcb', 
+              // 'mastercard',
+              // 'unionpay', 
+              // 'visa', 
+            ]
+          }
+          {
+            supportedMethods: [
+              'https://android.com/pay'
+            ],
+            data: {
+              merchantName: 'Android Pay Demo',
+              // Place your own Android Pay merchant ID here. The merchant ID is tied to
+              // the origin of the website.
+              merchantId: '00184145120947117657',
+              // If you do not yet have a merchant ID, uncomment the following line.
+              // environment: 'TEST',
+              allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA']
+            }
+          }
+        ];
       
         var details = {
           total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
