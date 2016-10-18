@@ -43,6 +43,12 @@
               // If you do not yet have a merchant ID, uncomment the following line.
               environment: 'TEST',
               allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA']
+            },
+            paymentMethodTokenizationParameters: {
+              tokenizationType: 'NETWORK_TOKEN',
+              parameters: {
+                'publicKey': 'pk_live_lNk21zqKM2BENZENh3rzCUgo'
+              }
             }
           }
         ];
