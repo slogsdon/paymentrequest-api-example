@@ -36,7 +36,14 @@
               //merchant ID obtained from Google that maps to your origin
               merchantId: '02510116604241796260',
               environment: 'TEST',
-              allowedCardNetworks: ['AMEX', 'MASTERCARD', 'VISA', 'DISCOVER'],
+              allowedCardNetworks: [
+                'amex', 
+                'diners', 
+                'discover', 
+                'jcb', 
+                'mastercard',
+                'visa', 
+              ],
               paymentMethodTokenizationParameters: {
                 tokenizationType: 'NETWORK_TOKEN',
                 parameters: {
