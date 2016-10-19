@@ -33,17 +33,12 @@
           {
             supportedMethods: ['https://android.com/pay'],
             data: {
-              //merchant ID obtained from Google that maps to your origin
-              merchantId: '02510116604241796260',
+              merchantName: 'Android Pay Demo',
+              // Place your own Android Pay merchant ID here. The merchant ID is tied to
+              // the origin of the website.
+              merchantId: '10490697845843384566',
               environment: 'TEST',
-              allowedCardNetworks: [
-                'amex', 
-                'diners', 
-                'discover', 
-                'jcb', 
-                'mastercard',
-                'visa', 
-              ],
+              allowedCardNetworks: ['AMEX', 'MASTERCARD', 'VISA', 'DISCOVER'],
               paymentMethodTokenizationParameters: {
                 tokenizationType: 'NETWORK_TOKEN',
                 parameters: {
