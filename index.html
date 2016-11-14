@@ -69,10 +69,11 @@
         new PaymentRequest(supportedInstruments, details) // eslint-disable-line no-undef
             .show()
             .then(function(instrumentResponse) {
+              console.log(instrumentResponse);
               sendPaymentToServer(instrumentResponse);
             })
             .catch(function(err) {
-              ChromeSamples.setStatus(err);
+              console.log(err);
             });
       }
       
@@ -93,7 +94,7 @@
                     instrumentToJsonString(instrumentResponse);
               })
               .catch(function(err) {
-                ChromeSamples.setStatus(err);
+                console.log(err);
               });
         }, 2000);
       }
