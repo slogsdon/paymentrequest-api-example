@@ -108,8 +108,8 @@
        */
       function instrumentToJsonString(instrument) {
         var details = instrument.details;
-        details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
-        details.cardSecurityCode = '***';
+        // details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
+        // details.cardSecurityCode = '***';
       
         // PaymentInsrument is an interface, but JSON.stringify works only on
         // dictionaries.
