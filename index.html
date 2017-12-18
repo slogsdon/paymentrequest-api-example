@@ -34,12 +34,22 @@
               merchantId: '10490697845843384566',
               // If you do not yet have a merchant ID, uncomment the following line.
               environment: 'TEST',
+              apiVersion: 1,
+              allowedPaymentMethods: ['CARD', 'TOKENIZED_CARD'],
               paymentMethodTokenizationParameters: {
                 tokenizationType: 'DIRECT',
                 parameters: {
                   'publicKey': 'BHJsSebsDxotOKvunTXRQBPYUGStIID6v4UiWHrFYRmYpNSDB1UoMmZzm1Z2HluMKim34YRwMO5iKdWATxFNN2s='
                 }
-              } 
+              },
+              cardRequirements: {
+                allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
+                billingAddressRequired: true,
+                billingAddressFormat: 'MIN'
+              },
+              phoneNumberRequired: true,
+              emailRequired: true,
+              shippingAddressRequired: true
             }
           }
         ];
