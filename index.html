@@ -37,9 +37,10 @@
               apiVersion: 1,
               allowedPaymentMethods: ['CARD', 'TOKENIZED_CARD'],
               paymentMethodTokenizationParameters: {
-                tokenizationType: 'DIRECT',
+                tokenizationType: 'PAYMENT_GATEWAY',
                 parameters: {
-                  'publicKey': 'BHJsSebsDxotOKvunTXRQBPYUGStIID6v4UiWHrFYRmYpNSDB1UoMmZzm1Z2HluMKim34YRwMO5iKdWATxFNN2s='
+                  'gateway': 'globalpayments',
+                  'gatewayMerchantId': 'heartlandgpsandbox'
                 }
               },
               cardRequirements: {
