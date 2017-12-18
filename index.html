@@ -17,33 +17,25 @@
       /**
        * Invokes PaymentRequest for credit cards.
        */
-      function onBuyClicked() {
+      function createPaymentRequest() {
         var supportedInstruments = [
           {
-            supportedMethods: [
-              'amex', 
-              'diners', 
-              'discover', 
-              'jcb', 
-              'mastercard',
-              'visa', 
-            ]
+            supportedMethods: ['basic-card']
           }
           ,
           {
             supportedMethods: [
-              'https://android.com/pay'
+              'https://google.com/pay'
             ],
             data: {
-              merchantName: 'Android Pay Demo',
-              // Place your own Android Pay merchant ID here. The merchant ID is tied to
+              merchantName: 'Pay with Google Demo',
+              // Place your own Pay with Google merchant ID here. The merchant ID is tied to
               // the origin of the website.
               merchantId: '10490697845843384566',
               // If you do not yet have a merchant ID, uncomment the following line.
               environment: 'TEST',
-              allowedCardNetworks: ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'],
               paymentMethodTokenizationParameters: {
-                tokenizationType: 'NETWORK_TOKEN',
+                tokenizationType: 'DIRECT',
                 parameters: {
                   'publicKey': 'BHJsSebsDxotOKvunTXRQBPYUGStIID6v4UiWHrFYRmYpNSDB1UoMmZzm1Z2HluMKim34YRwMO5iKdWATxFNN2s='
                 }
@@ -65,12 +57,23 @@
             }
           ]
         };
+        
+        var options = {
+          requestShipping: true,
+          requestPayerEmail: true,
+          requestPayerPhone: true,
+          requestPayerName: true
+        };
       
-        new PaymentRequest(supportedInstruments, details) // eslint-disable-line no-undef
+        return new PaymentRequest(supportedInstruments, details, options); // eslint-disable-line no-undef
+      }
+      
+      function onBuyClicked() {
+        createPaymentRequest()
             .show()
-            .then(function(instrumentResponse) {
-              console.log(instrumentResponse);
-              sendPaymentToServer(instrumentResponse);
+            .then(function(response) {
+              console.log(response);
+              sendPaymentToServer(response);
             })
             .catch(function(err) {
               console.log(err);
@@ -83,15 +86,15 @@
        * @param {PaymentResponse} instrumentResponse The payment information to
        * process.
        */
-      function sendPaymentToServer(instrumentResponse) {
+      function sendPaymentToServer(response) {
         // There's no server-side component of these samples. Not transactions are
         // processed and no money exchanged hands. Instantaneous transactions are not
         // realistic. Add a 2 second delay to make it seem more real.
         window.setTimeout(function() {
-          instrumentResponse.complete('success')
+          response.complete('success')
               .then(function() {
                 document.getElementById('result').innerHTML =
-                    instrumentToJsonString(instrumentResponse);
+                    instrumentToJsonString(response);
               })
               .catch(function(err) {
                 console.log(err);
@@ -106,26 +109,31 @@
        * @param {PaymentResponse} instrument The instrument to convert.
        * @return {string} The JSON string representation of the instrument.
        */
-      function instrumentToJsonString(instrument) {
-        var details = instrument.details;
+      function instrumentToJsonString(response) {
+        // var details = response.details;
         // details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
         // details.cardSecurityCode = '***';
       
         // PaymentInsrument is an interface, but JSON.stringify works only on
         // dictionaries.
-        return JSON.stringify({
-          methodName: instrument.methodName,
-          details: details
-        }, undefined, 2);
+        return JSON.stringify(response.toJSON(), undefined, 2);
       }
       
       var buyButton = document.getElementById('buyButton');
       if ('PaymentRequest' in window) {
-        buyButton.setAttribute('style', 'display: inline;');
-        buyButton.addEventListener('click', onBuyClicked);
+        var request = createPaymentRequest();
+        request.canMakePayment()
+          .then(function (result) {
+            if (result) {
+              buyButton.setAttribute('style', 'display: inline;');
+              buyButton.addEventListener('click', onBuyClicked);
+            } else {
+              alert('Issue creating payment request');
+            }
+          });
       } else {
         buyButton.setAttribute('style', 'display: none;');
-        ChromeSamples.setStatus('This browser does not support web payments');
+        alert('This browser does not support web payments');
       }
     </script>
   </body>
