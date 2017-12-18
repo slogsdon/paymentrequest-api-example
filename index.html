@@ -50,7 +50,7 @@
               },
               phoneNumberRequired: true,
               emailRequired: true,
-              shippingRequired: true
+              shippingRequired: false
             }
           }
         ];
@@ -70,7 +70,7 @@
         };
         
         var options = {
-          requestShipping: true,
+          requestShipping: false,
           requestPayerEmail: true,
           requestPayerPhone: true,
           requestPayerName: true
@@ -141,6 +141,9 @@
             } else {
               alert('Issue creating payment request');
             }
+          })
+          .catch(function (error) {
+            alert('cannot check if Google Pay is available');
           });
       } else {
         buyButton.setAttribute('style', 'display: none;');
