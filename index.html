@@ -49,7 +49,8 @@
                 billingAddressFormat: 'MIN'
               },
               phoneNumberRequired: true,
-              emailRequired: true
+              emailRequired: true,
+              shippingRequired: true
             }
           }
         ];
@@ -69,6 +70,7 @@
         };
         
         var options = {
+          requestShipping: true,
           requestPayerEmail: true,
           requestPayerPhone: true,
           requestPayerName: true
